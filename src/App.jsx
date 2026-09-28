@@ -12,14 +12,12 @@ import { QuranSection } from './components/QuranSection';
 import { CoupleSection } from './components/CoupleSection';
 import { CountdownSection } from './components/CountdownSection';
 import { EventsSection } from './components/EventsSection';
-import { StorySection } from './components/StorySection';
-import { GallerySection } from './components/GallerySection';
 import { RsvpWishesSection } from './components/RsvpWishesSection';
 import { GiftSection } from './components/GiftSection';
 import { FooterSection } from './components/FooterSection';
 import { ShareGeneratorModal } from './components/ShareGeneratorModal';
 import { FloatingPetals, CornerFloral, FloralHeaderOrnament } from './components/FloralElements';
-import { Calendar, Heart, MapPin, Sparkles } from 'lucide-react';
+import { Calendar, Sparkles } from 'lucide-react';
 import { DecorativeMandala, GoldDivider } from './components/IslamicOrnaments';
 
 function App() {
@@ -175,21 +173,6 @@ function App() {
               </span>
             </motion.div>
 
-            {/* Hero Couple Portrait */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.88 }}
-              animate={isOpened ? { opacity: 1, scale: 1 } : { opacity: 0 }}
-              transition={{ duration: 1, delay: 1 }}
-              className="relative mt-6 sm:mt-8 w-56 h-72 xs:w-64 xs:h-80 sm:w-80 sm:h-96 rounded-t-[3.8rem] sm:rounded-t-[5rem] rounded-b-2xl sm:rounded-b-3xl overflow-hidden border-2 border-gold-400/60 p-1 sm:p-1.5 shadow-luxury"
-            >
-              <img
-                src={weddingData.couple.coupleHeroImage}
-                alt="Nur Faizah & Ahmad Fiki"
-                className="w-full h-full object-cover rounded-t-[3.6rem] sm:rounded-t-[4.8rem] rounded-b-xl sm:rounded-b-2xl"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-transparent to-transparent pointer-events-none"></div>
-            </motion.div>
-
           </div>
         </section>
 
@@ -204,12 +187,6 @@ function App() {
 
         {/* Section Acara (Akad & Resepsi) + Maps */}
         <EventsSection events={weddingData.events} />
-
-        {/* Section Kisah Cinta (Love Story) */}
-        <StorySection loveStory={weddingData.loveStory} />
-
-        {/* Section Galeri Foto & Lightbox */}
-        <GallerySection gallery={weddingData.gallery} />
 
         {/* Section Buku Ucapan & Doa (RSVP) */}
         <RsvpWishesSection

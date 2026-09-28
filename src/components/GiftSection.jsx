@@ -104,7 +104,7 @@ export const GiftSection = ({ gifts }) => {
                       ) : (
                         <>
                           <Copy size={13} />
-                          <span>Salin Nomor Rekening</span>
+                          <span>Salin Nomor</span>
                         </>
                       )}
                     </button>

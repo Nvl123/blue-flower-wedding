@@ -1,4 +1,6 @@
 import backsoundAudio from '../assets/backsound.mp3';
+import brideImage from '../assets/wanita.jpeg';
+import groomImage from '../assets/pria.jpeg';
 
 export const weddingData = {
   couple: {
@@ -10,7 +12,7 @@ export const weddingData = {
       mother: "Ibu Rahniya",
       parents: "Putri tercinta dari Bapak Juma'i & Ibu Rahniya",
       instagram: "@nurfaizah",
-      image: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&q=80&w=800",
+      image: brideImage,
     },
     groom: {
       fullName: "Ahmad Fiki",
@@ -20,9 +22,8 @@ export const weddingData = {
       mother: "Ibu Haliyah",
       parents: "Putra tercinta dari Bapak Buhari & Ibu Haliyah",
       instagram: "@ahmadfiki",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800",
+      image: groomImage,
     },
-    coupleHeroImage: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=1200",
   },
   
   date: {
@@ -123,62 +124,45 @@ export const weddingData = {
   gifts: {
     bankAccounts: [
       {
-        bank: "BCA (Bank Central Asia)",
-        accountNumber: "1420987654",
-        holder: "Nur Faizah",
-        logo: "BCA"
-      },
-      {
         bank: "BRI (Bank Rakyat Indonesia)",
-        accountNumber: "001201089765502",
-        holder: "Ahmad Fiki",
+        accountNumber: "619701011144505",
+        holder: "NUR FAIZAH",
         logo: "BRI"
       },
       {
-        bank: "DANA / E-Wallet",
-        accountNumber: "081234567890",
-        holder: "Nur Faizah",
+        bank: "Bank Mandiri",
+        accountNumber: "1430034862704",
+        holder: "NUR FAIZAH",
+        logo: "MANDIRI"
+      },
+      {
+        bank: "SeaBank",
+        accountNumber: "901270053201",
+        holder: "NUR FAIZAH",
+        logo: "SEABANK"
+      },
+      {
+        bank: "DANA (E-Wallet)",
+        accountNumber: "08165422884",
+        holder: "NUR FAIZAH",
         logo: "DANA"
+      },
+      {
+        bank: "ShopeePay (E-Wallet)",
+        accountNumber: "08165422884",
+        holder: "NUR FAIZAH",
+        logo: "SHOPEEPAY"
       }
     ],
     physicalGift: {
       recipient: "Nur Faizah & Ahmad Fiki",
-      phone: "+62 812-3456-7890",
+      phone: "+62 816-5422-884",
       address: "Dusun Timur Pasar RT 08/RW 01, Kec. Maesan, Kab. Bondowoso, Jawa Timur 68262",
       notes: "Mohon konfirmasi terlebih dahulu melalui WhatsApp sebelum mengirim kado fisik."
     }
   },
 
-  initialWishes: [
-    {
-      id: 1,
-      name: "Ust. Abdullah & Keluarga",
-      attendance: "Hadir",
-      timestamp: "2 jam yang lalu",
-      message: "Baarakallahu laka wa baaraka 'alaika wa jama'a bainakuma fii khair. Semoga ananda Nur Faizah dan Ahmad Fiki menjadi keluarga yang sakinah, mawaddah, warahmah serta dikaruniai keturunan yang sholeh dan sholehah. Aamiin ya Rabbal 'Alamin."
-    },
-    {
-      id: 2,
-      name: "Rina & Dimas",
-      attendance: "Hadir",
-      timestamp: "5 jam yang lalu",
-      message: "Selamat ya Faizah & Fiki! Masya Allah seneng banget dengar kabar bahagianya. Semoga dilancarkan semua persiapannya sampai hari H nanti, dan langgeng till jannah! 🥰✨"
-    },
-    {
-      id: 3,
-      name: "H. Sulaiman",
-      attendance: "Hadir",
-      timestamp: "1 hari yang lalu",
-      message: "Selamat menempuh hidup baru untuk kedua mempelai. Semoga senantiasa dalam lindungan dan keberkahan Allah SWT. Salam untuk Pak Juma'i & Pak Buhari sekeluarga."
-    },
-    {
-      id: 4,
-      name: "Siti Fatimah (Teman Kuliah)",
-      attendance: "Ragu-ragu",
-      timestamp: "1 hari yang lalu",
-      message: "Barakallah Nur Faizah dan Fiki! Masya Allah terharu banget. Semoga acaranya berkah dan lancar tanpa kendala apapun. Insya Allah diusahakan hadir!"
-    }
-  ],
+  initialWishes: [],
 
   audio: {
     url: backsoundAudio,

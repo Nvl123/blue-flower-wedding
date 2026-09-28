@@ -22,19 +22,42 @@ export const RsvpWishesSection = ({ initialWishes = [], defaultGuestName = "" })
     }
   }, [defaultGuestName]);
 
-  // Load from LocalStorage or default initial wishes
-  useEffect(() => {
-    const saved = localStorage.getItem('wedding_wishes_v1');
-    if (saved) {
-      try {
-        setWishes(JSON.parse(saved));
-      } catch (e) {
-        setWishes(initialWishes);
-      }
-    } else {
-      setWishes(initialWishes);
+  // Storage key dedicated to real user wishes
+  const STORAGE_KEY = 'wedding_faizah_fiki_real_wishes';
+
+  const formatTimestamp = (dateInput) => {
+    if (!dateInput) return "Baru saja";
+    if (dateInput === "Baru saja") return "Baru saja";
+    try {
+      const date = new Date(dateInput);
+      if (isNaN(date.getTime())) return dateInput;
+      return date.toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    } catch {
+      return "Baru saja";
     }
-  }, [initialWishes]);
+  };
+
+  // Load purely real user wishes from localStorage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          setWishes(parsed);
+          return;
+        }
+      }
+    } catch (e) {
+      console.error("Gagal memuat ucapan dari penyimpanan:", e);
+    }
+    setWishes([]);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,11 +65,13 @@ export const RsvpWishesSection = ({ initialWishes = [], defaultGuestName = "" })
 
     setIsSubmitting(true);
 
+    const now = new Date();
     const newWish = {
       id: Date.now(),
       name: formData.name.trim(),
       attendance: formData.attendance,
-      pax: formData.pax,
+      pax: formData.attendance === 'Hadir' ? formData.pax : null,
+      createdAt: now.toISOString(),
       timestamp: "Baru saja",
       message: formData.message.trim()
     };
@@ -54,7 +79,11 @@ export const RsvpWishesSection = ({ initialWishes = [], defaultGuestName = "" })
     setTimeout(() => {
       const updatedWishes = [newWish, ...wishes];
       setWishes(updatedWishes);
-      localStorage.setItem('wedding_wishes_v1', JSON.stringify(updatedWishes));
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedWishes));
+      } catch (err) {
+        console.error("Gagal menyimpan ucapan:", err);
+      }
       
       triggerCelebration();
       setIsSubmitting(false);
@@ -62,7 +91,7 @@ export const RsvpWishesSection = ({ initialWishes = [], defaultGuestName = "" })
       setFormData(prev => ({ ...prev, message: "" }));
 
       setTimeout(() => setIsSuccess(false), 5000);
-    }, 600);
+    }, 400);
   };
 
   const getBadgeStyle = (attendance) => {
@@ -236,34 +265,55 @@ export const RsvpWishesSection = ({ initialWishes = [], defaultGuestName = "" })
             </div>
 
             {/* Scrollable list of comments */}
-            <div className="flex-1 overflow-y-auto space-y-2.5 sm:space-y-3.5 pr-1.5 custom-scrollbar relative z-10">
-              {wishes.map((item) => (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-navy-900/80 border border-gold-400/20 text-xs sm:text-sm hover:border-gold-400/40 transition-colors"
-                >
-                  <div className="flex items-center justify-between gap-1.5 mb-1">
-                    <span className="font-serif font-semibold text-gold-300 truncate text-xs sm:text-sm">
-                      {item.name}
-                    </span>
-                    
-                    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-medium border ${getBadgeStyle(item.attendance)}`}>
-                      {getBadgeIcon(item.attendance)}
-                      <span>{item.attendance}</span>
-                    </span>
+            <div className="flex-1 overflow-y-auto space-y-2.5 sm:space-y-3.5 pr-1.5 custom-scrollbar relative z-10 flex flex-col">
+              {wishes.length === 0 ? (
+                <div className="flex-1 flex flex-col items-center justify-center text-center p-4 my-auto">
+                  <div className="w-12 h-12 rounded-full bg-navy-800/80 border border-gold-400/30 flex items-center justify-center mb-3 text-gold-400">
+                    <MessageSquareHeart size={24} />
                   </div>
-
-                  <p className="text-slate-200 text-[11px] sm:text-[13px] font-light leading-relaxed my-1.5">
-                    {item.message}
+                  <p className="font-serif text-sm font-semibold text-gold-200">
+                    Belum ada untaian doa
                   </p>
+                  <p className="text-xs text-dusty-300 mt-1 max-w-xs leading-relaxed">
+                    Jadilah yang pertama mengirimkan konfirmasi kehadiran dan doa restu terbaik untuk kedua mempelai.
+                  </p>
+                </div>
+              ) : (
+                wishes.map((item) => (
+                  <motion.div
+                    key={item.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-navy-900/80 border border-gold-400/20 text-xs sm:text-sm hover:border-gold-400/40 transition-colors"
+                  >
+                    <div className="flex items-center justify-between gap-1.5 mb-1">
+                      <span className="font-serif font-semibold text-gold-300 truncate text-xs sm:text-sm">
+                        {item.name}
+                      </span>
+                      
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        {item.attendance === 'Hadir' && item.pax && (
+                          <span className="text-[10px] text-dusty-300 bg-navy-800 px-1.5 py-0.5 rounded border border-gold-400/20">
+                            {item.pax} orang
+                          </span>
+                        )}
+                        <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-medium border ${getBadgeStyle(item.attendance)}`}>
+                          {getBadgeIcon(item.attendance)}
+                          <span>{item.attendance}</span>
+                        </span>
+                      </div>
+                    </div>
 
-                  <div className="text-[9px] sm:text-[10px] text-dusty-400 text-right">
-                    {item.timestamp}
-                  </div>
-                </motion.div>
-              ))}
+                    <p className="text-slate-200 text-[11px] sm:text-[13px] font-light leading-relaxed my-1.5 break-words">
+                      {item.message}
+                    </p>
+
+                    <div className="text-[9px] sm:text-[10px] text-dusty-400 text-right">
+                      {item.createdAt ? formatTimestamp(item.createdAt) : item.timestamp}
+                    </div>
+                  </motion.div>
+                ))
+              )}
             </div>
           </motion.div>
 

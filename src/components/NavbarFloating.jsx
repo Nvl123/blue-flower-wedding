@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, Users, Calendar, Clock, Image, MessageSquareHeart, Gift, Share2 } from 'lucide-react';
+import { Home, Users, Calendar, MessageSquareHeart, Gift, Share2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const NavbarFloating = ({ onOpenShareModal }) => {
@@ -9,8 +9,6 @@ export const NavbarFloating = ({ onOpenShareModal }) => {
     { id: 'hero', label: 'Home', icon: Home },
     { id: 'mempelai', label: 'Mempelai', icon: Users },
     { id: 'acara', label: 'Acara', icon: Calendar },
-    { id: 'cerita', label: 'Cerita', icon: Clock },
-    { id: 'galeri', label: 'Galeri', icon: Image },
     { id: 'ucapan', label: 'Ucapan', icon: MessageSquareHeart },
     { id: 'hadiah', label: 'Hadiah', icon: Gift },
   ];
