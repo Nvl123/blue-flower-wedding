@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Clock, CalendarPlus, BellRing } from 'lucide-react';
 import { GoldDivider } from './IslamicOrnaments';
 
-export const CountdownSection = ({ targetDate = "2026-10-04T06:00:00+07:00" }) => {
+export const CountdownSection = ({ targetDate = "2026-10-04T09:00:00+07:00" }) => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -44,8 +44,8 @@ export const CountdownSection = ({ targetDate = "2026-10-04T06:00:00+07:00" }) =
     const title = encodeURIComponent("Pernikahan Nur Faizah & Ahmad Fiki");
     const details = encodeURIComponent("Akad & Resepsi Pernikahan Nur Faizah & Ahmad Fiki di Dusun Timur Pasar RT 08/RW 01, Kec. Maesan, Kab. Bondowoso");
     const location = encodeURIComponent("Dusun Timur Pasar RT 08/RW 01, Kec. Maesan, Kab. Bondowoso");
-    // 4 Oct 2026, 06:00 WIB (UTC+7 -> 2026-10-03 23:00 UTC) to 18:00 WIB (2026-10-04 11:00 UTC)
-    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261003T230000Z/20261004T110000Z&details=${details}&location=${location}`;
+    // 4 Oct 2026, 09:00 WIB (UTC+7 -> 2026-10-04 02:00 UTC) to 18:00 WIB (2026-10-04 11:00 UTC)
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261004T020000Z/20261004T110000Z&details=${details}&location=${location}`;
     window.open(googleCalendarUrl, '_blank');
   };
 

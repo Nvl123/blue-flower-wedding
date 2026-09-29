@@ -29,7 +29,7 @@ export const weddingData = {
   date: {
     dayName: "Minggu",
     fullDate: "4 Oktober 2026",
-    targetDate: "2026-10-04T06:00:00+07:00",
+    targetDate: "2026-10-04T09:00:00+07:00",
     islamicDate: "22 Rabiul Akhir 1448 H",
   },
 
@@ -49,7 +49,7 @@ export const weddingData = {
       title: "Akad Nikah",
       day: "Minggu",
       date: "4 Oktober 2026",
-      time: "06.00 WIB - Selesai",
+      time: "09.00 WIB - Selesai",
       venueName: "Kediaman Mempelai Wanita",
       address: "Dusun Timur Pasar RT 08/RW 01, Kec. Maesan, Kab. Bondowoso, Jawa Timur",
       mapsQuery: "Dusun Timur Pasar RT 08 RW 01 Kec Maesan Kab Bondowoso",
